@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import Title from '@/components/shared/title';
 import FilterCheckbox from '@/components/shared/filter-checkbox';
+import { Input } from '@/components/ui/input';
+import { RangeSlider } from '@/components/shared/range-slider';
+import CheckboxFiltersGroup from '@/components/shared/checkbox-filters-group';
 
 type Props = {
 	className?: string;
@@ -15,6 +18,56 @@ const Filters: FC<Props> = ({ className }) => {
 				<FilterCheckbox text='Можно собирать' value='1' />
 				<FilterCheckbox text='Новинки' value='2' />
 			</div>
+
+			<div className='mt-5 border-y border-y-neutral-100 py-6 pb-7'>
+				<p className='font-bold mb-3'>Цена:</p>
+				<div className='flex gap-3 mb-5'>
+					<Input
+						type='number'
+						placeholder='0'
+						min={0}
+						max={1000}
+						defaultValue={0}
+					/>
+					<Input
+						type='number'
+						placeholder='1000'
+						min={0}
+						max={1000}
+						defaultValue={0}
+						value={500}
+					/>
+				</div>
+				<RangeSlider min={0} max={5000} step={10} value={[0, 5000]} />
+			</div>
+
+			<CheckboxFiltersGroup
+				title='Ингридиенты'
+				className='mt-5'
+				items={[
+					{ text: 'Сырный соус', value: '1' },
+					{ text: 'Моцарелла', value: '2' },
+					{ text: 'Чеснок', value: '3' },
+					{ text: 'Солённные огурчики', value: '4' },
+					{ text: 'Красный лук', value: '5' },
+					{ text: 'Томаты', value: '6' },
+					{ text: 'Сырный соус', value: '1' },
+					{ text: 'Моцарелла', value: '2' },
+					{ text: 'Чеснок', value: '3' },
+					{ text: 'Солённные огурчики', value: '4' },
+					{ text: 'Красный лук', value: '5' },
+					{ text: 'Томаты', value: '6' },
+				]}
+				limit={6}
+				defaultItems={[
+					{ text: 'Сырный соус', value: '1' },
+					{ text: 'Моцарелла', value: '2' },
+					{ text: 'Чеснок', value: '3' },
+					{ text: 'Солённные огурчики', value: '4' },
+					{ text: 'Красный лук', value: '5' },
+					{ text: 'Томаты', value: '6' },
+				]}
+			/>
 		</div>
 	);
 };

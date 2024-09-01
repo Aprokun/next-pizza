@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 
-type Props = {
+export type FilterCheckboxProps = {
 	text: string;
 	value: string;
 	endAdornment?: ReactNode;
@@ -9,7 +9,7 @@ type Props = {
 	checked?: boolean;
 };
 
-const FilterCheckbox: FC<Props> = ({
+const FilterCheckbox: FC<FilterCheckboxProps> = ({
 	text,
 	value,
 	endAdornment,
