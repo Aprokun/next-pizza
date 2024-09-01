@@ -17,11 +17,7 @@ const ProductCard: FC<Props> = ({ id, name, price, imageUrl, className }) => {
 		<div className={className}>
 			<Link href={'/product/1'}>
 				<div className='flex justify-center p-6 bg-secondary rounded-lg h-[260px]'>
-					<img
-						className='w-[215px] h-[215px]'
-						src={imageUrl}
-						alt='Product Photo'
-					/>
+					<img src={imageUrl} alt='Product Photo' />
 				</div>
 
 				<Title text={name} size='sm' className='mb-1 mt-3 font-bold' />
