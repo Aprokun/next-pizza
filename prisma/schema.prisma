@@ -18,6 +18,7 @@ model User {
   orders           Order[]
   verificationCode VerificationCode?
   role             UserRoles         @default(USER)
+  verified         DateTime?
 
   provider   String?
   providerId String?
