@@ -23,8 +23,7 @@ const ProductCard: FC<Props> = ({ id, name, price, imageUrl, className }) => {
 				<Title text={name} size='sm' className='mb-1 mt-3 font-bold' />
 
 				<p className='text-sm text-gray-400'>
-					Цыпленок, моцарелла, сыры чеддер и пармезан, сырный соус, томаты, соус
-					альфредо, чеснок
+					Цыпленок, моцарелла, сыры чеддер и пармезан, сырный соус, томаты, соус альфредо, чеснок
 				</p>
 
 				<div className='flex justify-between items-center mt-4'>
