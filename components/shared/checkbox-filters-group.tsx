@@ -1,9 +1,7 @@
 'use client';
 
 import React, { ChangeEvent, FC, useState } from 'react';
-import FilterCheckbox, {
-	FilterCheckboxProps,
-} from '@/components/shared/filter-checkbox';
+import FilterCheckbox, { FilterCheckboxProps } from '@/components/shared/filter-checkbox';
 import { Input } from '@/components/ui/input';
 
 type Item = FilterCheckboxProps;
@@ -33,9 +31,7 @@ const CheckboxFiltersGroup: FC<Props> = ({
 	const [searchValue, setSearchValue] = useState('');
 
 	const list = showAll
-		? items.filter((item) =>
-				item.text.toLowerCase().includes(searchValue.toLocaleLowerCase()),
-			)
+		? items.filter((item) => item.text.toLowerCase().includes(searchValue.toLocaleLowerCase()))
 		: defaultItems?.slice(0, limit);
 
 	const onChangeSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -72,10 +68,7 @@ const CheckboxFiltersGroup: FC<Props> = ({
 
 			{limit && items.length > limit && (
 				<div className={showAll ? 'border-t border-t-neutral-100 mt-4' : ''}>
-					<button
-						onClick={() => setShowAll(!showAll)}
-						className='text-primary mt-3'
-					>
+					<button onClick={() => setShowAll(!showAll)} className='text-primary mt-3'>
 						{showAll ? 'Скрыть' : '+ Показать все'}
 					</button>
 				</div>

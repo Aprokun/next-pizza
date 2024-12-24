@@ -25,10 +25,7 @@ const FilterCheckbox: FC<FilterCheckboxProps> = ({
 				className='rounded-[8px] w-6 h-6'
 				id={`checkbox-${String(value)}`}
 			/>
-			<label
-				htmlFor={`checkbox-${String(value)}`}
-				className='leading-none cursor-pointer flex-1'
-			>
+			<label htmlFor={`checkbox-${String(value)}`} className='leading-none cursor-pointer flex-1'>
 				{text}
 			</label>
 			{endAdornment}

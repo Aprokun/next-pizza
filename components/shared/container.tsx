@@ -6,9 +6,7 @@ type Props = {
 };
 
 const Container: FC<PropsWithChildren<Props>> = ({ className, children }) => {
-	return (
-		<div className={cn(className, 'mx-auto max-w-[1280px]')}>{children}</div>
-	);
+	return <div className={cn(className, 'mx-auto max-w-[1280px]')}>{children}</div>;
 };
 
 export default Container;

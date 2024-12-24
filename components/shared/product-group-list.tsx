@@ -15,13 +15,7 @@ type Props = {
 	categoryId: number;
 };
 
-const ProductGroupList: FC<Props> = ({
-	className,
-	title,
-	listClassName,
-	items,
-	categoryId,
-}) => {
+const ProductGroupList: FC<Props> = ({ className, title, listClassName, items, categoryId }) => {
 	const intersectionRef = useRef(null);
 	const intersection = useIntersection(intersectionRef, { threshold: 0.4 });
 	const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
