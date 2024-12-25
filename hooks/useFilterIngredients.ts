@@ -1,22 +1,22 @@
 'use client';
 
-import { Api } from '@/services/api-client';
 import { Ingredient } from '@prisma/client';
-import { useEffect, useState } from 'react';
+import { useSet } from 'react-use';
 
 interface ReturnProps {
-	ingredients: Ingredient[];
+	onAddId: (id: string) => void;
+	setSelectedIngredients: (ids: string[]) => void;
 }
 
-export const useFilterIngredients = (): ReturnProps => {
-	const [items, setItems] = useState<Ingredient[]>([]);
+export const useFilterIngredients = (values: string[] = []): ReturnProps => {
+	const [selectedIngredients, { toggle }] = useSet<string>(new Set(values));
 
-	useEffect(() => {
-		Api.ingredients
-			.getAll()
-			.then((data) => setItems(data))
-			.catch((error) => console.error(error));
-	}, []);
+	const setSelectedIngredients = (ids: string[]) => {
+		ids.forEach(selectedIngredients.add);
+	};
 
-	return { ingredients: items };
+	return {
+		onAddId: toggle,
+		setSelectedIngredients,
+	};
 };
