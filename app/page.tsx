@@ -4,15 +4,27 @@ import React from 'react';
 import Container from '@/components/shared/container';
 import Filters from '@/components/shared/filters';
 import ProductGroupList from '@/components/shared/product-group-list';
+import { prisma } from '@/prisma/prisma';
 
-export default function Home() {
+export default async function Home() {
+	const categories = await prisma.category.findMany({
+		include: {
+			products: {
+				include: {
+					ingredients: true,
+					items: true,
+				},
+			},
+		},
+	});
+
 	return (
 		<>
 			<Container className='mt-10'>
 				<Title text='Все пиццы' size='lg' className='font-extrabold' />
 			</Container>
 
-			<TopBar />
+			<TopBar categories={categories.filter((category) => category.products.length > 0)} />
 
 			<Container className='pb-14 mt-10'>
 				<div className='flex gap-[60px]'>
@@ -22,114 +34,17 @@ export default function Home() {
 
 					<div className='flex-1'>
 						<div className='flex flex-col gap-16'>
-							<ProductGroupList
-								title='Пиццы'
-								items={[
-									{
-										id: '2',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '3',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '4',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '5',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '6',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '7',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-								]}
-								categoryId={1}
-							/>
-							<ProductGroupList
-								title='Завтраки'
-								items={[
-									{
-										id: '2',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '3',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '4',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '5',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '6',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-									{
-										id: '7',
-										name: 'Пицца',
-										imageUrl:
-											'https://media.dodostatic.net/image/r:233x233/11EE7D610D2925109AB2E1C92CC5383C.avif',
-										price: 600,
-										items: [{ price: 600 }],
-									},
-								]}
-								categoryId={2}
-							/>
+							{categories.map(
+								(category) =>
+									category.products.length > 0 && (
+										<ProductGroupList
+											key={category.id}
+											title={category.name}
+											items={category.products}
+											categoryId={category.id}
+										/>
+									),
+							)}
 						</div>
 					</div>
 				</div>
