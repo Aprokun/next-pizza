@@ -32,7 +32,7 @@ const ProductGroupList: FC<Props> = ({ className, title, listClassName, items, c
 			<Title text={title} size='lg' className='font-extrabold mb-5' />
 
 			<div className={cn(listClassName, 'grid grid-cols-3 gap-[50px]')}>
-				{items.map((item, index) => (
+				{items.map((item) => (
 					<ProductCard
 						key={item.id}
 						id={item.id}
