@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { RangeSlider } from '@/components/shared/range-slider';
 import CheckboxFiltersGroup from '@/components/shared/checkbox-filters-group';
 import { useRouter } from 'next/navigation';
-import { useFilters, useIngredients, useQueryFilters } from '@/hooks';
+import { useFilters, useIngredients, useQueryFilters } from '../../shared/hooks';
 
 type Props = {
 	className?: string;

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Container from '@/components/shared/container';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ShoppingCart, User } from 'lucide-react';
