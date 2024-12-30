@@ -6,22 +6,12 @@ import { Button } from '@/components/ui/button';
 type Props = {
 	imageUrl: string;
 	name: string;
+	price: number;
 	className?: string;
-	ingredients: any;
-	items?: any;
-	onClickAdd?: VoidFunction;
+	onSubmit?: VoidFunction;
 };
 
-export const ChooseProductForm: FC<Props> = ({
-	imageUrl,
-	name,
-	ingredients,
-	onClickAdd,
-	items,
-	className,
-}) => {
-	const textDetails = 'asdfaslsadfasfdasdfasdf';
-
+export const ChooseProductForm: FC<Props> = ({ imageUrl, name, price, onSubmit, className }) => {
 	return (
 		<div className={cn('flex flex-1', className)}>
 			<div className='flex items-center justify-center flex-1 relative w-full'>
@@ -35,10 +25,8 @@ export const ChooseProductForm: FC<Props> = ({
 			<div className='w-[490px] bg-[#F7F7F7] p-7'>
 				<Title text={name} size='md' className='font-extrabold mb-1' />
 
-				<p className='text-gray-400'>{textDetails}</p>
-
-				<Button className='h-[55px] px-10 text-base rounded-[18px] w-full mt-10'>
-					Добавить в корзину
+				<Button onClick={onSubmit} className='h-[55px] px-10 text-base rounded-[18px] w-full mt-10'>
+					Добавить в корзину за {price} Р
 				</Button>
 			</div>
 		</div>

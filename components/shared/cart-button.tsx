@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const CartButton: FC<Props> = ({ className }) => {
-	const totalAmount = useCartStore((state) => state.totalAmount);
+	const itemsCount = useCartStore((state) => state.items.length);
 	const price = useCartStore((state) =>
 		state.items.reduce((acc, item) => {
 			return acc + item.price;
@@ -26,7 +26,7 @@ export const CartButton: FC<Props> = ({ className }) => {
 				<span className='h-full w-[1px] bg-white/30 mx-3'></span>
 				<div className='flex items-center gap-1 transition duration-300 group-hover:opacity-0'>
 					<ShoppingCart className='relative' strokeWidth={2} size={16} />
-					<b>{totalAmount}</b>
+					<b>{itemsCount}</b>
 				</div>
 				<ArrowRight
 					className='absolute right-5 transition duration-300 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:-translate-x-0'

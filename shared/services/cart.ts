@@ -17,6 +17,6 @@ export const removeItemFromCart = async (id: number) => {
 };
 
 export const addCartItem = async (values: CreateCartItemValues) => {
-	const { data } = await axiosInstance.post<CartDto>('/cart/', values);
+	const { data } = await axiosInstance.post<CartDto>('/cart', values);
 	return data;
 };
