@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/sheet';
 import { PizzaSize, PizzaType } from '@/shared/constants/pizza';
 import { getCartItemDetails } from '@/shared/lib/get-cart-item-details';
-import { updateItemQuantity } from '@/shared/services/cart';
 import { useCartStore } from '@/shared/store/cart';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
@@ -51,7 +50,7 @@ export const CartDrawer: FC<PropsWithChildren<Props>> = ({ className, children }
 				<SheetContent className='flex flex-col justify-between pb-0 bg-[#F4F1EE]'>
 					<SheetHeader>
 						<SheetTitle>
-							В корзине <span className='font-bold'>3 товара</span>
+							В корзине <span className='font-bold'>{totalAmount} товара</span>
 						</SheetTitle>
 					</SheetHeader>
 

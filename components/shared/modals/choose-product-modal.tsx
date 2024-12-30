@@ -7,6 +7,7 @@ import { ChooseProductForm } from '@/components/shared/modals/choose-product-for
 import { ProductWithRelations } from '@/@types/prisma';
 import { ChoosePizzaForm } from '@/components/shared/modals/choose-pizza-form';
 import { cn } from '@/shared/lib/utils';
+import { useCartStore } from '@/shared/store/cart'
 
 type Props = {
 	product: ProductWithRelations;
@@ -16,6 +17,7 @@ type Props = {
 export const ChooseProductModal: FC<Props> = ({ product, className }) => {
 	const router = useRouter();
 	const isPizzaForm = Boolean(product.items[0].pizzaType);
+	const addCartItem = useCartStore(state => state.addCartItem)
 	const { imageUrl, name } = product;
 
 	return (
@@ -32,6 +34,7 @@ export const ChooseProductModal: FC<Props> = ({ product, className }) => {
 						imageUrl={imageUrl}
 						ingredients={product.ingredients}
 						items={product.items}
+						onClickAddCart={addCartItem}
 					/>
 				) : (
 					<ChooseProductForm imageUrl={imageUrl} name={name} ingredients={product.ingredients} />
