@@ -12,17 +12,19 @@ type Props = {
 };
 
 export const CartButton: FC<Props> = ({ className }) => {
-	const itemsCount = useCartStore((state) => state.items.length);
-	const price = useCartStore((state) =>
-		state.items.reduce((acc, item) => {
-			return acc + item.price;
-		}, 0),
-	);
+	const [itemsCount, loading, totalAmount] = useCartStore((state) => [
+		state.items.length,
+		state.loading,
+		state.totalAmount,
+	]);
 
 	return (
 		<CartDrawer>
-			<Button className={cn('group relative', className)}>
-				<b>{price} RUB</b>
+			<Button
+				disabled={loading}
+				className={cn('group relative', { 'w-[105px]': loading }, className)}
+			>
+				<b>{totalAmount} ₽</b>
 				<span className='h-full w-[1px] bg-white/30 mx-3'></span>
 				<div className='flex items-center gap-1 transition duration-300 group-hover:opacity-0'>
 					<ShoppingCart className='relative' strokeWidth={2} size={16} />
