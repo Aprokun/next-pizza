@@ -1,6 +1,6 @@
 import TopBar from '@/components/shared/top-bar';
 import Title from '@/components/shared/title';
-import React from 'react';
+import React, { Suspense } from 'react';
 import Container from '@/components/shared/container';
 import Filters from '@/components/shared/filters';
 import ProductGroupList from '@/components/shared/product-group-list';
@@ -29,7 +29,9 @@ export default async function Home() {
 			<Container className='pb-14 mt-10'>
 				<div className='flex gap-[60px]'>
 					<div className='w-[250px]'>
-						<Filters />
+						<Suspense>
+							<Filters />
+						</Suspense>
 					</div>
 
 					<div className='flex-1'>
