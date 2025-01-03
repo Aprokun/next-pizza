@@ -38,6 +38,7 @@ const ProductGroupList: FC<Props> = ({ className, title, listClassName, items, c
 						id={item.id}
 						name={item.name}
 						price={item.items[0].price}
+						ingredients={item.ingredients}
 						imageUrl={item.imageUrl}
 					/>
 				))}
