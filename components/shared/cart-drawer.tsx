@@ -11,40 +11,22 @@ import {
 	SheetTrigger,
 } from '@/components/ui/sheet';
 import { PizzaSize, PizzaType } from '@/shared/constants/pizza';
+import { useCart } from '@/shared/hooks';
 import { getCartItemDetails } from '@/shared/lib/get-cart-item-details';
-import { useCartStore } from '@/shared/store/cart';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { FC, PropsWithChildren, useEffect } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-type Props = {
-	className?: string;
-};
-
-export const CartDrawer: FC<PropsWithChildren<Props>> = ({ className, children }) => {
-	const [totalAmount, items, fetchCartItems, updateItemQuantity, removeCartItem] = useCartStore(
-		(state) => [
-			state.totalAmount,
-			state.items,
-			state.fetchCartItems,
-			state.updateItemQuantity,
-			state.removeCartItem,
-		],
-	);
-
-	useEffect(() => {
-		fetchCartItems();
-	}, []);
+export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
+	const { items, totalAmount, removeCartItem, updateItemQuantity } = useCart();
 
 	const onClickCountButton = async (id: number, quantity: number, type: 'plus' | 'minus') => {
-		console.log(id, quantity, type);
 		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
-		console.log(newQuantity);
 		await updateItemQuantity(id, newQuantity);
 	};
 
 	return (
-		<div className={className}>
+		<div>
 			<Sheet>
 				<SheetTrigger asChild>{children}</SheetTrigger>
 				<SheetContent className='flex flex-col justify-between pb-0 bg-[#F4F1EE]'>
@@ -62,14 +44,11 @@ export const CartDrawer: FC<PropsWithChildren<Props>> = ({ className, children }
 										<CartDrawerItem
 											cartItem={{
 												...item,
-												details:
-													item.pizzaSize &&
-													item.pizzaType &&
-													getCartItemDetails(
-														item.ingredients,
-														item.pizzaType as PizzaType,
-														item.pizzaSize as PizzaSize,
-													),
+												details: getCartItemDetails(
+													item.ingredients,
+													item.pizzaType as PizzaType,
+													item.pizzaSize as PizzaSize,
+												),
 											}}
 											onClickCountButton={(type) =>
 												onClickCountButton(item.id, item.quantity, type)
@@ -89,7 +68,7 @@ export const CartDrawer: FC<PropsWithChildren<Props>> = ({ className, children }
 										</span>
 										<span className='font-bold text-lg'>{totalAmount} P</span>
 									</div>
-									<Link href='/cart'>
+									<Link href='/checkout'>
 										<Button type='submit' className='w-full h-12 text-base'>
 											Оформить заказ
 											<ArrowRight className='w-5 ml-2' />

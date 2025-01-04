@@ -9,12 +9,14 @@ import SearchInput from '@/components/shared/search-input';
 import { CartButton } from '@/components/shared/cart-button';
 
 type Props = {
+	showSearch: boolean;
+	showCartButton: boolean;
 	className?: string;
 };
 
-const Header: FC<Props> = ({ className }) => {
+const Header: FC<Props> = ({ showSearch = true, showCartButton = true, className }) => {
 	return (
-		<header className={cn(className, 'border border-b')}>
+		<header className={cn(className, 'border-b')}>
 			<Container className='flex items-center justify-between py-8'>
 				<Link href='/'>
 					<div className='flex items-center gap-4'>
@@ -27,7 +29,7 @@ const Header: FC<Props> = ({ className }) => {
 					</div>
 				</Link>
 
-				<div className='mx-10 flex-1'>
+				<div className='mx-10 flex-1' hidden={!showSearch}>
 					<SearchInput />
 				</div>
 
@@ -36,7 +38,7 @@ const Header: FC<Props> = ({ className }) => {
 						<User size={16} />
 						Войти
 					</Button>
-					<CartButton />
+					<CartButton showCartButton={showCartButton} />
 				</div>
 			</Container>
 		</header>
