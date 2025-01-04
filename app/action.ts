@@ -1,7 +1,9 @@
 'use server';
 
 import { CheckoutFormValues } from '@/components/shared/checkout/schemas/checkout-form-schema';
+import { PayOrder } from '@/components/shared/email-templates/pay-order';
 import { prisma } from '@/prisma/prisma';
+import { sendEmail } from '@/shared/lib/send-email';
 import { OrderStatus } from '@prisma/client';
 import { cookies } from 'next/headers';
 
@@ -71,5 +73,16 @@ export async function createOrder(data: CheckoutFormValues) {
 		},
 	});
 
-	return 'https://www.google.com/webhp?hl=ru&sa=X&ved=0ahUKEwjl1_Drgt2KAxXN9gIHHdFcN_4QPAgI';
+	await sendEmail(
+		data.email,
+		`Next Pizza | Оплатите заказ #${order.id}`,
+		PayOrder({
+			orderId: order.id,
+			totalAmount: order.totalAmount,
+			paymentUrl:
+				'https://www.google.com/webhp?hl=ru&sa=X&ved=0ahUKEwjl1_Drgt2KAxXN9gIHHdFcN_4QPAgI',
+		}),
+	);
+
+	return '';
 }
