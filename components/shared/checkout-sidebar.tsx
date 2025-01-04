@@ -3,6 +3,8 @@ import { WhiteBlock } from './white-block';
 import { CheckoutItemDetails } from './checkout-item-details';
 import { ArrowRight, Box, Car, Percent } from 'lucide-react';
 import { Button } from '../ui/button';
+import { Skeleton } from '../ui/skeleton';
+import { SkeletonFieldWrapper } from './skeleton-field-wrapper';
 
 const DELIVERY_PRICE = 500;
 const SERVICE_PERCENT_PRICE = 5;
@@ -21,7 +23,9 @@ export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading }) => {
 			<WhiteBlock className='p-6 sticky top-4'>
 				<div className='flex flex-col gap-1'>
 					<span className='text-xl'>Итого</span>
-					<span className='text-[34px] font-extrabold'>{totalPrice} Р</span>
+					<SkeletonFieldWrapper loading={loading} skeletonClassName='h-11 w-48'>
+						<span className='h-11 text-[34px] font-extrabold'>{totalPrice} Р</span>
+					</SkeletonFieldWrapper>
 				</div>
 
 				<CheckoutItemDetails
@@ -31,7 +35,11 @@ export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading }) => {
 							Стоимость товаров
 						</>
 					}
-					value={`${totalAmount} Р`}
+					value={
+						<SkeletonFieldWrapper loading={loading} skeletonClassName='h-6 w-16 rounded-[6px]'>
+							{totalAmount} Р
+						</SkeletonFieldWrapper>
+					}
 				/>
 				<CheckoutItemDetails
 					title={
@@ -40,7 +48,11 @@ export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading }) => {
 							Сервисный сбор
 						</>
 					}
-					value={`${servicePrice} Р`}
+					value={
+						<SkeletonFieldWrapper loading={loading} skeletonClassName='h-6 w-16 rounded-[6px]'>
+							{servicePrice} Р
+						</SkeletonFieldWrapper>
+					}
 				/>
 				<CheckoutItemDetails
 					title={
@@ -49,7 +61,11 @@ export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading }) => {
 							Доставка
 						</>
 					}
-					value={`${DELIVERY_PRICE} Р`}
+					value={
+						<SkeletonFieldWrapper loading={loading} skeletonClassName='h-6 w-16 rounded-[6px]'>
+							{DELIVERY_PRICE} Р
+						</SkeletonFieldWrapper>
+					}
 				/>
 
 				<Button

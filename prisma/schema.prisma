@@ -127,7 +127,7 @@ model Order {
 
   fullName String
   email    String
-  password String
+  phone    String
   address  String
   comment  String?
 
